@@ -20,6 +20,10 @@ describe('authenticated-middleware', () => {
         });
     });
 
+    it('should properly expose the function name', () => {
+        expect(middleware.name).to.equal('authenticated');
+    });
+
     it('should call next() with UnauthenticatedError if no authorization header is present', () => {
         let req = {
             headers: {},

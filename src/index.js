@@ -19,7 +19,7 @@ function getToken(req) {
 export default (options = {}) => {
     const secret = options.secret || '';
 
-    return (req, res, next) => {
+    function authenticated(req, res, next) {
         let token = getToken(req);
         if (!token) {
             return next(new UnauthenticatedError());
@@ -39,5 +39,7 @@ export default (options = {}) => {
             logger.debug('jwt invalid', err);
             return next(new UnauthenticatedError());
         }
-    };
+    }
+
+    return authenticated;
 };
